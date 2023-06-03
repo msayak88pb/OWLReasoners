@@ -61,8 +61,14 @@ public class Main {
             OWLClassExpression classExpression = dl.parser.parseClassExpression(classExpressionString);
 
 
+            // See getInstances https://owlcs.github.io/owlapi/apidocs_4/org/semanticweb/owlapi/reasoner/OWLReasoner.html
+            // If direct is true, a NodeSet containing named individuals such that for each named individual j in the node set,
+            // the set of reasoner axioms entails DirectClassAssertion(ce, j).
+            // If direct is false, a NodeSet containing named individuals such that for each named individual j in the node set,
+            // the set of reasoner axioms entails ClassAssertion(ce, j).
+            // If ce is unsatisfiable with respect to the set of reasoner axioms then the empty NodeSet is returned.
 
-            Set<OWLNamedIndividual> individuals= dl.getInstances(classExpression, false);
+            Set<OWLNamedIndividual> individuals= dl.getInstances(classExpression, true);
             JSONObject jo = new JSONObject();
             jo.put("concept", classExpression);
             JSONArray array=new JSONArray();
