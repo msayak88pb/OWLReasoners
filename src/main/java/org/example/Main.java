@@ -203,7 +203,8 @@ class DLQueryEngine {
      */
     public Set<OWLNamedIndividual> getInstances(OWLClassExpression classExpression, boolean direct) {
         // See getInstances https://owlcs.github.io/owlapi/apidocs_4/org/semanticweb/owlapi/reasoner/OWLReasoner.html
-        NodeSet<OWLNamedIndividual> individuals = reasoner.getInstances(classExpression, direct);
+        NodeSet<OWLNamedIndividual> individuals = reasoner.getInstances(classExpression);
+
         return asUnorderedSet(individuals.entities());
     }
 }
