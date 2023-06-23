@@ -17,15 +17,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import org.semanticweb.owlapi.model.OWLClass;
-import org.semanticweb.owlapi.model.OWLClassExpression;
-import org.semanticweb.owlapi.model.OWLEntity;
-import org.semanticweb.owlapi.model.OWLNamedIndividual;
-import org.semanticweb.owlapi.model.OWLOntology;
-import org.semanticweb.owlapi.model.OWLOntologyManager;
-import org.semanticweb.owlapi.reasoner.Node;
-import org.semanticweb.owlapi.reasoner.NodeSet;
-import org.semanticweb.owlapi.reasoner.OWLReasoner;
+
 import org.semanticweb.owlapi.util.mansyntax.ManchesterOWLSyntaxParser;
 
 import static org.semanticweb.owlapi.util.OWLAPIStreamUtils.asList;
@@ -36,8 +28,7 @@ public class Main {
     /**
      * @param args args
      */
-    private static final File file = new File("/home/demir/Desktop/Softwares/NRW/KGs/Family/family-benchmark_rich_background.owl");
-
+     private static File file = new File("/home/msi/NERO/Ontolearn-0.4.0/KGs/Family/family-benchmark_rich_background.owl");
     public static void main(String[] args) {
         //https://github.com/perwendel/spark
         port(8080);
