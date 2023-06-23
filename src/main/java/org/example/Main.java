@@ -1,4 +1,5 @@
 package org.example;
+import org.apache.http.impl.io.DefaultHttpResponseWriter;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.semanticweb.owlapi.apibinding.OWLManager;
@@ -28,12 +29,47 @@ public class Main {
     /**
      * @param args args
      */
-     private static File file = new File("/home/msi/NERO/Ontolearn-0.4.0/KGs/Family/family-benchmark_rich_background.owl");
+    //By default path if not passed as argument
+    private static File file = new File("/home/msi/NERO/Ontolearn-0.4.0/KGs/Family/family-benchmark_rich_background.owl");
+    //By default port number 
+    static int defaultportNumber = 8080;
+    static int portNumber = defaultportNumber;
     public static void main(String[] args) {
-        //https://github.com/perwendel/spark
-        port(8080);
+    //Local path of an ontology should be given as an argument
+        String pathOfFile;
+        if (args.length >=1){
+            pathOfFile =args[0];
+            file = new File (pathOfFile);
+        if (!file.exists() || file.isDirectory()){
+            System.err.println("Invalid path of ontology.Using default path"+file.getPath());
+        file = new File("/home/msi/NERO/Ontolearn-0.4.0/KGs/Family/family-benchmark_rich_background.owl");
+        }
+        }            
+        else {
+            pathOfFile = file.getPath();}
+
+   
+    // Check if port is provided in cmd argument
+    if  (args.length >=2){
+        try{
+            portNumber = Integer.parseInt(args[1]);
+            //Showing ontology file path:
+            System.out.println("Ontology file path " + pathOfFile);
+        }
+        catch (Exception e) {
+            System.err.println("Invalid number for port,So setting the default port no:"+portNumber);
+           portNumber = defaultportNumber;
+        }
+    }
+    //Listening to port no:
+    System.out.println("Listening to port: " + portNumber);
+    
+
+
+    //https://github.com/perwendel/spark
+        port(portNumber);
+        //port(8080);
         OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-        //TODO: File should be given as an argument.
         OWLOntology ontology = null;
         try {
             ontology = manager.loadOntologyFromOntologyDocument(file);
@@ -92,6 +128,8 @@ public class Main {
             System.out.println();
         }
     }
+
+  //Reads a line of input from the console's standard input and returns it.  
     private static String readInput() throws IOException {
         InputStream is = System.in;
         InputStreamReader reader;
@@ -291,6 +329,7 @@ class DLQueryPrinter {
         }
     }
 
+    //Adds a structured representation of a group of OWL entities, together with a list of their names and short forms,
     private void printEntities(String name, Set<? extends OWLEntity> entities, StringBuilder sb) {
         sb.append(name);
         int length = 50 - name.length();
