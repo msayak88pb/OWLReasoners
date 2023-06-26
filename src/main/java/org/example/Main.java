@@ -1,5 +1,4 @@
 package org.example;
-import org.apache.http.impl.io.DefaultHttpResponseWriter;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.semanticweb.owlapi.apibinding.OWLManager;
@@ -79,15 +78,14 @@ public class Main {
         System.out.println("Loaded ontology: " + ontology);
         DLQueryEngine dl=new DLQueryEngine(createReasoner(ontology), new SimpleShortFormProvider());
         post("/hermit", (request, response) -> {
-            String classExpressionString=request.body().trim();
+        String classExpressionString=request.body().trim();
+       
 
             if (classExpressionString.trim().isEmpty()) {
                 System.out.println("Input Expression:" + classExpressionString + "is empty");
                 return Collections.emptySet();
             }
-            OWLClassExpression classExpression = dl.parser.parseClassExpression(classExpressionString);
-
-
+            OWLClassExpression classExpression = dl.parser.parseClassExpression(classExpressionString);       
             // See getInstances https://owlcs.github.io/owlapi/apidocs_4/org/semanticweb/owlapi/reasoner/OWLReasoner.html
             // If direct is true, a NodeSet containing named individuals such that for each named individual j in the node set,
             // the set of reasoner axioms entails DirectClassAssertion(ce, j).
@@ -112,8 +110,9 @@ public class Main {
 
     }
 
-    private static void doQueryLoop(DLQueryPrinter dlQueryPrinter) throws IOException {
-        while (true) {
+  
+   private static void doQueryLoop(DLQueryPrinter dlQueryPrinter) throws IOException {
+       while (true) {
             // Prompt the user to enter a class expression
             System.out.println(
                     "Please type a class expression in Manchester Syntax and press Enter (or press x to exit):");
@@ -128,6 +127,7 @@ public class Main {
             System.out.println();
         }
     }
+    
 
   //Reads a line of input from the console's standard input and returns it.  
     private static String readInput() throws IOException {
