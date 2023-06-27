@@ -10,7 +10,7 @@ OWLReasoners act as strong backends for a variety of applications in the knowled
 ```
 Without parameters
 ```
-    java Main.java 
+    java Main
 
 # Expected Output 
 ![alt text](Images/Expected%20Output.png)
@@ -19,7 +19,7 @@ Without parameters
 ```
 With parameters
 ```
-    java Main.java /home/msi/NERO/Ontolearn-0.4.0/KGs/father.owl  3030
+    java Main /home/msi/NERO/Ontolearn-0.4.0/KGs/father.owl  3030
 
 # Expected Output with Ontology path and Port No provided as argument
 ![alt text](Images/Ontology%20path%20and%20PORt%20no%20provided%20as%20argument.png)    
