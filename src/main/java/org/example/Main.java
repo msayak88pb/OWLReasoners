@@ -29,7 +29,7 @@ public class Main {
      * @param args args
      */
     //By default path if not passed as argument
-    private static File file = new File("/home/msi/NERO/Ontolearn-0.4.0/KGs/Family/family-benchmark_rich_background.owl");
+    private static File file;
     //By default port number 
     static int defaultportNumber = 8080;
     static int portNumber = defaultportNumber;
@@ -41,12 +41,11 @@ public class Main {
             file = new File (pathOfFile);
         if (!file.exists() || file.isDirectory()){
             System.err.println("Invalid path of ontology.Using default path"+file.getPath());
-        file = new File("/home/msi/NERO/Ontolearn-0.4.0/KGs/Family/family-benchmark_rich_background.owl");
-        }
+           }
         }            
         else {
             pathOfFile = file.getPath();}
-
+            
    
     // Check if port is provided in cmd argument
     if  (args.length >=2){
